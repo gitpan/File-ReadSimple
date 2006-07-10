@@ -133,24 +133,26 @@ close ( GREPREPLACE );
 
 
 sub file_tail {
-my $no =1 ;
+my $no = "1" ;
 open ( FILETAIL, "$_[0]") || die "File not found";
 my @lines = <FILETAIL>;
-my $first = $lines[-1];
-print "$first";
+my $start = $#lines;
+#my $first = $lines[-1];
+#my $len = length ($first );
+print $lines[-1] if ( length($lines[-1]) > 0 );
 while ($no > 0 )
 {
-	@lines = <FILETAIL>;
-	my $second = $lines[-1];
-	if ($first ne $second)
+	my @new_lines = <FILETAIL>;
+  my $end = $#new_lines;
+	if ( $start =! $end )
 	{
-		print "$second";
-	}
-
-	$first = $second;
+  print $new_lines[-1]; 	
+}	
 }
 close(FILETAIL);
 }
+
+
 
 
 1;
